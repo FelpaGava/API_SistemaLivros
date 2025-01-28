@@ -1,5 +1,6 @@
 using API_WebLocalize.Data;
-using API_WebLocalize.Services;
+using API_WebLocalize.Services.Autor;
+using API_WebLocalize.Services.Livro;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAutorInterface, AutorService>();
+builder.Services.AddScoped<ILivroInterface, LivroService>();
 
 //configuração do banco de dados na inicialização da aplicação
 builder.Services.AddDbContext<AppDbContext>(options =>

@@ -1,5 +1,5 @@
 ﻿namespace API_WebLocalize.Models
-{                       // Isso é um modelo de resposta genérico
+{                       // Isso é um modelo de resposta padrão
     public class ResponseModel<T>
     {
         public T? Dados {get; set; }

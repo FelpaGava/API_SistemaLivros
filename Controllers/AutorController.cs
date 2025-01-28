@@ -1,5 +1,6 @@
-﻿using API_WebLocalize.Models;
-using API_WebLocalize.Services;
+﻿using API_WebLocalize.Dto.Autor;
+using API_WebLocalize.Models;
+using API_WebLocalize.Services.Autor;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace API_WebLocalize.Controllers
     [ApiController]
     public class AutorController : ControllerBase
     {
-        private readonly IAutorInterface _autorInterface; // Injeção de dependência
+        private readonly IAutorInterface _autorInterface; // Injeções de dependências
         public AutorController(IAutorInterface autorInterface)
         {
             _autorInterface = autorInterface;
@@ -35,6 +36,27 @@ namespace API_WebLocalize.Controllers
             var autor = await _autorInterface.BuscarAutorPorIdLivro(idLivro);
             return Ok(autor);
         }
-            
+
+        [HttpPost("CriarAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> CriarAutor(AutorCriacaoDto autorCriacaoDto)
+        {
+            var autores = await _autorInterface.CriarAutor(autorCriacaoDto);
+            return Ok(autores);
+        }
+
+        [HttpPut("EditarAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> EditarAutor(AutorEdicaoDto autorEdicaoDto)
+        {
+            var autores = await _autorInterface.EditarAutor(autorEdicaoDto);
+            return Ok(autores);
+        }
+
+        [HttpDelete("ExcluirAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> ExcluirtAutor(int idAutor)
+        {
+            var autores = await _autorInterface.ExcluirAutor(idAutor);
+            return Ok(autores);
+        }
+
     }
 }
